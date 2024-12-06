@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Etch-A-Sketch</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Etch-A-Sketch</h1>
+    <div class="btndiv">
+      <button id="grid-size">Enter Grid Size</button>
+      <button id="resetGrid">Reset</button>
+    </div>
+    
+    <div class="container"></div>
+    <div id="gridModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Enter Grid Size (1-100):</p>
+    <input type="number" id="gridInput" min="1" max="100">
+    <button id="submitGridSize">Submit</button>
+  </div>
+</div>
+    <script src="script.js"></script>
+  </body>
+</html>
