@@ -5,24 +5,36 @@ const closeModal = document.querySelector(".close");
 const gridInput = document.getElementById("gridInput");
 const submitGridSize = document.getElementById("submitGridSize");
 const resetBtn = document.querySelector("#resetGrid");
+const eraserBtn = document.querySelector("#eraser-btn");
+let isEraserActive = false;
+
+// Toggle eraser mode
+eraserBtn.addEventListener("click", () => {
+  isEraserActive = !isEraserActive;
+  eraserBtn.style.backgroundColor = isEraserActive ? "#d32f2f" : "#f44336";
+  eraserBtn.textContent = isEraserActive ? "Eraser: ON" : "Eraser";
+});
 
 function createGrid(size) {
   container.innerHTML = ""; // Clear existing grid
   const squareSize = 960 / size; // Calculate square size dynamically
-  
+
   for (let i = 0; i < size * size; i++) {
     const square = document.createElement("div");
     square.classList.add("inDivs");
     square.style.height = `${squareSize}px`;
     square.style.width = `${squareSize}px`;
-    container.appendChild(square);
 
-
-    // Add hover effect with random colors
+    // Add hover functionality
     square.addEventListener("mouseover", () => {
-      const randomColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
-      square.style.backgroundColor = randomColor;
+      if (isEraserActive) {
+        square.style.backgroundColor = "black"; // Default background
+      } else {
+        square.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+      }
     });
+
+    container.appendChild(square);
   }
 }
 
@@ -40,15 +52,17 @@ closeModal.addEventListener("click", () => {
 submitGridSize.addEventListener("click", () => {
   const size = parseInt(gridInput.value);
   if (isNaN(size) || size < 1 || size > 200) {
-    alert("Please enter a valid number between 1 and 100.");
+    alert("Please enter a valid number between 1 and 200.");
     return;
   }
   createGrid(size);
   modal.style.display = "none"; // Close the modal
 });
 
-resetBtn.addEventListener("click", ()=> {
-  container.innerHTML = "";
-  createGrid(16);
-})
+// Event listener for reset button
+resetBtn.addEventListener("click", () => {
+  createGrid(16); // Reset to default size
+});
+
+// Initialize the default grid
 createGrid(16);

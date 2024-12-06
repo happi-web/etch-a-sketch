@@ -39,7 +39,8 @@ h1
   
 }
 #grid-size,
-#resetGrid
+#resetGrid,
+#eraser-btn
 {
   padding: 10px;
   color: purple;
